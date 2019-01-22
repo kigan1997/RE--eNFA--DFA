@@ -1,3 +1,10 @@
+/*
+This program is to convert a Regular Expression to 
+corrosponding NFA with epsilon move to 
+it's corrosponding Equivalent DFA 
+
+Created by - Akash Banerjee
+*/
 #include <stdio.h>
 #include <string.h>
 #include <stdlib.h>
@@ -232,18 +239,6 @@ int main(void){
 
 	int k = -1;
 	// Initialize the transition states for input symbols
-	/*for (int i = 0,j = 0; i < strlen(inStr2); i++, j+=2)//
-	{
-		if(inStr2[i] == '.')
-			j-= 2;
-
-		if(indexA(symbol,inStr2[i])>-1){
-			k = -1;
-			while(table[j][indexA(symbol,inStr2[i])][++k]!=-1);
-			table[j][indexA(symbol,inStr2[i])][k] = (j + 1);
-		}
-	}
-*/
 	int ep = strlen(symbol);
 
 	STATES *head = NULL;
@@ -394,13 +389,6 @@ int main(void){
 			e_trasition(head2[i],&temp1,ep,table,indexA(symbol,symbol[j])); //ep transition of a state
 			closure_of_list(temp1,&temp2,ep,table); //  ep-closure of that transition
 
-			/*if(temp2 == NULL) //
-			{
-				head2[++pt] = temp2;
-				table2[i][j] = pt;
-				//table2[i][j] = -1;
-				//continue;
-			}*/
 			int abc = check_multiple_list_same(head2,temp2); //check for new state
 			if(abc != -1)//for old state
 				table2[i][j] = abc;
@@ -446,13 +434,3 @@ int main(void){
 		for(int b = 0; b < ep; b++)
 			free(table[a][b]);
 }
-
-/**
- (a.b)|(b.a)
-
- (a|b)*.a.(a|b)*
- ab|*a.ab|*.
-
- ((a+b)*.a)*.((b+a)*.b)
- ab+*a.*ba+*b..
-*/
